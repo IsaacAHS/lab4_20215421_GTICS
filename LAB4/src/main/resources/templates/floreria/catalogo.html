@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Catalogo</title>
+</head>
+<body>
+<main>
+    <div class="container px-4 py-5">
+        <h1 class="pb-2 border-bottom">Lista de Flores</h1>
+        <div class="d-flex mt-3 mb-4">
+
+            <a class="btn btn-secondary ms-auto" th:href="@{'/'}">Regresar</a>
+        </div>
+        <form method="post" th:action="@{/floreria/buscarFlor}">
+            <input name="searchField" class="form-control mb-3" type="text" placeholder="Search"/>
+        </form>
+        <div class="row">
+            <div class="col-md-4" th:each="flor, info : ${listaProductos}">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${flor.tipo.nombretipo}+' '+${flor.color.nombrecolor}+' '+'para'+' '+${flor.ocasion.nombreocasion}">#Orden</h5>
+                        <p class="card-text">
+                            <strong>Precio:</strong> <span th:text="${flor.precio}">Precio</span><br>
+                            <strong>Stock:</strong> <span th:text="${flor.stock}">Stock</span><br>
+                            <strong>Descripcion:</strong> <span th:text="${flor.descripcion}">Descripcion</span><br>
+
+                        </p>
+                        <a class="btn btn-primary" th:href="@{'/floreria/agregar?id=' + ${flor.id}}">Agregar</a>
+                        <a class="btn btn-primary" th:href="@{'/floreria/quitar?id=' + ${flor.id}}">Quitar</a>
+                        <a class="btn btn-primary" th:href="@{'/floreria/comprar?id=' + ${flor.id}}">Comprar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

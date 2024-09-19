@@ -14,16 +14,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/flores")
+@RequestMapping("/floreria")
 public class FlorController {
 
     final FloresRepository floresRepository;
 
+
     public FlorController(FloresRepository floresRepository){
         this.floresRepository= floresRepository;
     }
+    @GetMapping(value={"","/"})
     public String catalogoFlores(Model model){
         model.addAttribute("listaProductos", floresRepository.findAll());
-        return "flores/catalogo";
+        return "floreria/catalogo";
     }
 }
