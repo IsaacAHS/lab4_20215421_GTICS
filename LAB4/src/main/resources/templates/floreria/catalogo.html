@@ -4,32 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}"/>
+
     <title>Catalogo</title>
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm" style="padding: 1.5rem;">
         <div class="container-fluid">
-            <a class="navbar-brand" th:href="@{'/'}">Floristería</a>
+            <a class="navbar-brand" th:href="@{'/'}" style="font-size: 2.5rem; font-weight: bold; color: #3d17aa;">
+                PRIMAVERA ETERNA <i class="bi bi-leaf"></i>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ms-auto" style="font-size: 1.25rem;">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{'/catalogo'}">Catálogo</a>
+                        <a class="nav-link" th:href="@{'/'}"><i class="bi bi-book"></i> Catálogo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{'/entretenimiento'}">Entretenimiento</a>
+                        <a class="nav-link" th:href="@{'floreria/entretenimiento'}"><i class="bi bi-puzzle"></i> Entretenimiento</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{'/carrito'}">Carrito</a>
+                        <a class="nav-link" th:href="@{'floreria/carrito'}"><i class="bi bi-cart"></i> Carrito</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
+
+
+
 <main>
     <div class="container px-4 py-5">
         <h1 class="pb-2 border-bottom">Lista de Flores</h1>
