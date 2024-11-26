@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}"/>
+
+    <title>Catalogo</title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm" style="padding: 1.5rem;">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{'/'}" style="font-size: 2.5rem; font-weight: bold; color: #3d17aa;">
+                PRIMAVERA ETERNA <i class="bi bi-leaf"></i>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto" style="font-size: 1.25rem;">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{'/'}"><i class="bi bi-book"></i> Catálogo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{'floreria/entretenimiento'}"><i class="bi bi-puzzle"></i> Entretenimiento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{'floreria/carrito'}"><i class="bi bi-cart"></i> Carrito</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+
+<main>
+    <div class="container px-4 py-5">
+        <h1 class="pb-2 border-bottom">Lista de Flores</h1>
+        <div class="d-flex mt-3 mb-4">
+            <a class="btn btn-secondary ms-auto" th:href="@{'/'}">Regresar</a>
+        </div>
+
+        <!-- Formulario de filtros -->
+        <form method="get" th:action="@{/floreria/buscarFlor}" class="mb-4">
+            <div class="row">
+                <!-- Filtro por color -->
+                <div class="col-md-4">
+                    <label for="color" class="form-label">Color</label>
+                    <select id="color" name="color" class="form-select">
+                        <option th:each="color: ${listaColor}"
+                                th:text="${color.nombrecolor}" th:value="${color.id}">Abrir</option>
+
+                    </select>
+                </div>
+
+                <!-- Filtro por tipo -->
+                <div class="col-md-4">
+                    <label for="tipo" class="form-label">Tipo</label>
+                    <select id="tipo" name="tipo" class="form-select">
+                        <option th:each="tipo: ${listaTipo}"
+                                th:text="${tipo.nombretipo}" th:value="${tipo.id}">Abrir</option>
+
+                    </select>
+                </div>
+
+                <!-- Filtro por ocasión -->
+                <div class="col-md-4">
+                    <label for="ocasion" class="form-label">Ocasión</label>
+                    <select id="ocasion" name="ocasion" class="form-select">
+                        <option th:each="ocasion: ${listaOcasion}"
+                                th:text="${ocasion.nombreocasion}" th:value="${ocasion.id}">Abrir</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Botón para aplicar los filtros -->
+            <div class="d-flex mt-3">
+                <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+            </div>
+        </form>
+
+        <!-- Resultados de flores filtradas -->
+        <div class="row">
+            <div class="col-md-4" th:each="flor, info : ${listaProductos}">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${flor.tipo.nombretipo}+' '+${flor.color.nombrecolor}+' '+'para'+' '+${flor.ocasion.nombreocasion}">#Orden</h5>
+                        <p class="card-text">
+                            <img th:src="${flor.imagen}" alt="Imagen de la flor" style="max-width: 100%; height: auto;"><br>
+                            <strong>Precio: s/.</strong> <span th:text="${flor.precio}">Precio</span><br>
+                            <strong>Stock:</strong> <span th:text="${flor.stock}">Stock</span><br>
+                            <strong>Descripción:</strong> <span th:text="${flor.descripcion}">Descripción</span><br>
+                        </p>
+                        <a class="btn btn-primary" th:href="@{'/floreria/agregar?id=' + ${flor.id}}">Agregar</a>
+                        <a class="btn btn-primary" th:href="@{'/floreria/quitar?id=' + ${flor.id}}">Quitar</a>
+                        <a class="btn btn-primary" th:href="@{'/floreria/comprar?id=' + ${flor.id}}">Comprar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
